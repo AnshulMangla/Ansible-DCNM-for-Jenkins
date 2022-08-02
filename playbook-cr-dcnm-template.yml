@@ -1,0 +1,34 @@
+- 
+  name: test my dcnm module
+  hosts: dcnm-kk
+  gather_facts: false
+  connection: ansible.netcommon.httpapi
+  no_log: false
+  # vars:
+  #   inventory_hostname: 10.66.50.14
+  #   username: admin
+  #   password: C1sc0123
+  #   desired_state: present
+
+
+  tasks:
+    - name: Create or modify templates
+      cisco.dcnm.dcnm_template:
+        state: deleted        # only choose form [merged, deleted, query]
+        config:
+          - name: template_101
+            description: "Template_101"
+            tags: "internal policy 101"
+            content: |
+              telemetry
+                certificate /bootflash/telegraf.crt telegraf
+                destination-profile
+                  use-vrf management
+                destination-group 101
+                  ip address 10.195.225.176 port 57101 protocol gRPC encoding GPB
+                sensor-group 101
+                  data-source DME
+                  path sys/ch depth unbounded
+                subscription 101
+                  dst-grp 101
+                  snsr-grp 101 sample-interval 10101
