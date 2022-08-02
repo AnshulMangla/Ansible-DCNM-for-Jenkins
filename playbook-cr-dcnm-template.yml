@@ -8,7 +8,7 @@
   tasks:
     - name: Create or modify templates
       cisco.dcnm.dcnm_template:
-        state: merged        # only choose form [merged, deleted, query]
+        state: deleted        # only choose form [merged, deleted, query]
         config:
           - name: template_101
             description: "Template_101"
