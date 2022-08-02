@@ -4,17 +4,11 @@
   gather_facts: false
   connection: ansible.netcommon.httpapi
   no_log: false
-  # vars:
-  #   inventory_hostname: 10.66.50.14
-  #   username: admin
-  #   password: C1sc0123
-  #   desired_state: present
-
 
   tasks:
     - name: Create or modify templates
       cisco.dcnm.dcnm_template:
-        state: deleted        # only choose form [merged, deleted, query]
+        state: merged        # only choose form [merged, deleted, query]
         config:
           - name: template_101
             description: "Template_101"
